@@ -8,7 +8,7 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\Admin\BookController as AdminBookController;
 
 // Rute Publik (Guest & User)
-Route::get('/', [BookController::class, 'index'])->name('home');
+Route::get('/', [BookController::class, 'home'])->name('home');
 Route::get('/books', [BookController::class, 'index'])->name('books.index');
 Route::get('/books/{book}', [BookController::class, 'show'])->name('books.show');
 
@@ -24,7 +24,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
+
     // Rute untuk membaca buku (sekarang menampilkan view page-flip)
     Route::get('/books/{book}/read', [BookController::class, 'read'])->name('books.read');
     Route::get('/books/{book}/serve', [BookController::class, 'servePdf'])->name('books.serve');

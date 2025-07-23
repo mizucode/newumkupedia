@@ -18,7 +18,7 @@
       @click akan mengubah state tersebut
       :class atau x-show akan menampilkan/menyembunyikan menu berdasarkan state
     --}}
-    <nav x-data="{ isMenuOpen: false }" class="bg-white text-indigo-600 shadow-md sticky top-0 z-50 lg:px-16">
+    <nav x-data="{ isMenuOpen: false }" class="bg-white text-indigo-600 shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4">
             <div class="flex items-center justify-between py-4">
                 {{-- Logo/Brand --}}
@@ -40,19 +40,19 @@
 
                 {{-- Menu untuk Desktop --}}
                 <div class="hidden lg:flex lg:items-center lg:space-x-4">
-                    <a class="py-2 px-3 hover:bg-indigo-600 hover:text-white rounded transition duration-150 ease-in-out" href="{{ route('books.index') }}">Semua Buku</a>
+                    <a class="py-2 px-3 hover:bg-indigo-600 hover:text-white rounded transition duration-150 ease-in-out" href="#semuabuku">Semua Buku</a>
                     @auth
-                    <a class="py-2 px-3 hover:bg-indigo-600 hover:text-white rounded transition duration-150 ease-in-out" href="{{ route('dashboard') }}">Dashboard</a>
+                    <a class="py-2 px-3 hover:bg-indigo-600 rounded transition duration-150 ease-in-out" href="{{ route('dashboard') }}">Dashboard</a>
                     @if(auth()->user()->role == 'admin')
-                    <a class="py-2 px-3 hover:bg-indigo-600 hover:text-white rounded transition duration-150 ease-in-out" href="{{ route('admin.books.index') }}">Manajemen Buku</a>
+                    <a class="py-2 px-3 hover:bg-indigo-600 rounded transition duration-150 ease-in-out" href="{{ route('admin.books.index') }}">Manajemen Buku</a>
                     @endif
-                    <form action="{{ route('logout') }}" method="POST" class="m-0 p-0">
+                    <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit" class="py-2 px-3 hover:bg-red-600 hover:text-white rounded transition duration-150 ease-in-out align-middle">Logout</button>
+                        <button type="submit" class="py-2 px-3 hover:bg-indigo-600 rounded transition duration-150 ease-in-out w-full text-left">Logout</button>
                     </form>
                     @endauth
                     @guest
-                    <a class="py-2 px-3 hover:bg-indigo-600 hover:text-white rounded transition duration-150 ease-in-out" href="{{ route('login') }}">Login</a>
+                    <a class="py-2 px-3 hover:bg-indigo-600  hover:text-white rounded transition duration-150 ease-in-out" href="{{ route('login') }}">Login</a>
                     <a class="py-2 px-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded transition duration-150 ease-in-out" href="{{ route('register') }}">Register</a>
                     @endguest
                 </div>
@@ -76,7 +76,7 @@
                     @endauth
                     @guest
                     <li><a class="block py-2 px-3 hover:bg-indigo-600  hover:text-white rounded transition duration-150" href="{{ route('login') }}">Login</a></li>
-                    <li><a class="block py-2 px-3 hover:bg-indigo-600 hover:text-white rounded transition duration-150" href="{{ route('register') }}">Register</a></li>
+                    <li><a class="block py-2 px-3 hover:bg-indigo-600 rounded transition duration-150" href="{{ route('register') }}">Register</a></li>
                     @endguest
                 </ul>
             </div>
@@ -111,7 +111,7 @@
         @yield('content')
     </main>
 
-    <footer class="text-center py-6 bg-gray-800 text-gray-400">
+    <footer class="text-center mt-12 py-6 bg-gray-800 text-gray-400">
         <p>© {{ date('Y') }} Umkupedia. Hak Cipta Dilindungi.</p>
     </footer>
 

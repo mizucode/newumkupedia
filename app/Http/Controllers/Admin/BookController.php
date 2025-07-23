@@ -11,9 +11,19 @@ use Spatie\PdfToImage\Pdf;
 
 class BookController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $books = Book::latest()->get();
+        $query = Book::query();
+
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where(function($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('author', 'like', "%{$search}%");
+            });
+        }
+
+        $books = $query->latest()->paginate(10)->withQueryString();
         return view('admin.books.index', compact('books'));
     }
 
@@ -22,14 +32,19 @@ class BookController extends Controller
         return view('admin.books.create');
     }
 
-   public function store(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'title' => 'required|string|max:255|unique:books,title',
+            'slug' => 'nullable|string|max:255',
             'author' => 'required|string|max:255',
             'description' => 'required|string',
-            'cover_image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'pdf_file' => 'required|mimes:pdf|max:10240', // max 10MB
+            'jumlah_halaman' => 'nullable|integer|min:1',
+            'isbn' => 'nullable|string|max:50',
+            'tahun_terbit' => 'nullable|integer|min:1000|max:3000',
+            'penerbit' => 'nullable|string|max:255',
+            'cover_image' => 'required|image|mimes:jpeg,png,jpg|max:30720 ',
+            'pdf_file' => 'required|mimes:pdf|max:30720 ', // max 10MB
         ]);
 
         // Handle Cover Image Upload
@@ -43,6 +58,10 @@ class BookController extends Controller
             'slug' => Str::slug($request->title) . '-' . uniqid(),
             'author' => $request->author,
             'description' => $request->description,
+            'jumlah_halaman' => $request->jumlah_halaman,
+            'isbn' => $request->isbn,
+            'tahun_terbit' => $request->tahun_terbit,
+            'penerbit' => $request->penerbit,
             'cover_image_path' => $coverPath,
             'pdf_path' => $pdfPath,
         ]);
@@ -63,17 +82,17 @@ class BookController extends Controller
             'author' => 'required|string|max:255',
             'description' => 'required|string',
         ]);
-        
+
         // Note: Mengupdate file PDF akan menjadi operasi yang berat.
         // Untuk saat ini, kita hanya perbolehkan update data teks.
         $bookData = $request->only(['title', 'author', 'description']);
-        
+
         $book->update($bookData);
 
         return redirect()->route('admin.books.index')->with('success', 'Data buku berhasil diperbarui.');
     }
 
-     public function destroy(Book $book)
+    public function destroy(Book $book)
     {
         // Hapus file dari storage
         Storage::disk('public')->delete($book->cover_image_path);

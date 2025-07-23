@@ -12,15 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('books', function (Blueprint $table) {
-            $table->string('jumlah_halaman')->nullable()->after('description');
-
-            $table->string('penulis')->nullable()->after('jumlah_halaman');
-
-            $table->string('isbn')->unique()->nullable()->after('penulis');
-
-            $table->string('tahun_terbit')->nullable()->after('isbn');
-
-            $table->string('penerbit')->nullable()->after('tahun_terbit');
+            // Menghapus kolom 'penulis'
+            $table->dropColumn('penulis');
         });
     }
 
@@ -30,7 +23,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('books', function (Blueprint $table) {
-            //
+            // Jika Anda perlu 'mengembalikan' kolom 'penulis' saat rollback
+            // Sesuaikan tipe data dan properti lainnya sesuai definisi awal Anda
+            $table->string('penulis')->nullable()->after('jumlah_halaman');
         });
     }
 };

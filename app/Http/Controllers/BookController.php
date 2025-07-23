@@ -9,8 +9,29 @@ class BookController extends Controller
 {
     public function index()
     {
-        $books = Book::latest()->paginate(12);
+        $query = request('q');
+        $books = Book::query()
+            ->when($query, function ($q) use ($query) {
+                $q->where('title', 'like', "%$query%")
+                    ->orWhere('author', 'like', "%$query%");
+            })
+            ->latest()
+            ->paginate(12)
+            ->withQueryString();
         return view('books.index', compact('books'));
+    }
+    public function home()
+    {
+        $query = request('q');
+        $books = Book::query()
+            ->when($query, function ($q) use ($query) {
+                $q->where('title', 'like', "%$query%")
+                    ->orWhere('author', 'like', "%$query%");
+            })
+            ->latest()
+            ->paginate(12)
+            ->withQueryString();
+        return view('books.home', compact('books'));
     }
 
     public function show(Book $book)
@@ -38,5 +59,4 @@ class BookController extends Controller
 
         return response()->file($path);
     }
-
 }

@@ -104,10 +104,7 @@
 
 <body>
 
-    <div class="reader-header">
-        <h1>Membaca: {{ $book->title }}</h1>
-        <a class="close-button" href="{{ url('/books/' . $book->slug) }}" title="Kembali">×</a>
-    </div>
+ 
 
     <div class="pdf-viewer-container">
         <iframe id="pdf-viewer-frame" title="PDF Viewer untuk {{ $book->title }}"></iframe>
