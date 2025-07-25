@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use App\Models\Pemanfaat;
 
 class BookController extends Controller
 {
@@ -36,8 +37,12 @@ class BookController extends Controller
 
     public function show(Book $book)
     {
+        $pemanfaat = null;
+        if ($book->pemanfaat) {
+            $pemanfaat = Pemanfaat::where('kode_pemanfaat', $book->pemanfaat)->first();
+        }
         $isFavorited = auth()->check() ? auth()->user()->favorites->contains($book) : false;
-        return view('books.show', compact('book', 'isFavorited'));
+        return view('books.show', compact('book', 'isFavorited', 'pemanfaat'));
     }
 
     /**

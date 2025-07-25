@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard')
+@section(section: 'title', content: 'Dashboard')
 
 @section('content')
 <div class="max-w-6xl min-h-screen mx-auto px-4 py-8">

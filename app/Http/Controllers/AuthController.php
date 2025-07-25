@@ -53,10 +53,10 @@ class AuthController extends Controller
 
             // Arahkan berdasarkan role
             if (Auth::user()->role === 'admin') {
-                return redirect()->intended('/admin/books');
+                return redirect()->route('admin.dashboard');
             }
 
-            return redirect()->intended('/dashboard');
+            return redirect()->route('dashboard');
         }
 
         return back()->withErrors([

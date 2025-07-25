@@ -11,10 +11,16 @@ class FavoriteController extends Controller
     public function toggle(Book $book)
     {
         $user = Auth::user();
-
         // `toggle` akan menambah jika belum ada, dan menghapus jika sudah ada
         $user->favorites()->toggle($book->id);
-
         return back()->with('success', 'Status favorit berhasil diubah.');
+    }
+
+    // Menampilkan semua daftar buku favorit user yang sedang login
+    public function list()
+    {
+        $user = Auth::user();
+        $favoriteBooks = $user->favorites()->latest()->get();
+        return view('admin.dashboard.userfavorite', compact('favoriteBooks'));
     }
 }

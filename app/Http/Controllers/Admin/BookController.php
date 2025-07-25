@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Spatie\PdfToImage\Pdf;
+use App\Models\Pemanfaat;
 
 class BookController extends Controller
 {
@@ -29,11 +30,14 @@ class BookController extends Controller
 
     public function create()
     {
-        return view('admin.books.create');
+        $pemanfaat = Pemanfaat::all();
+
+        return view('admin.books.create', compact('pemanfaat'));
     }
 
     public function store(Request $request)
     {
+
         $request->validate([
             'title' => 'required|string|max:255|unique:books,title',
             'slug' => 'nullable|string|max:255',
@@ -43,9 +47,14 @@ class BookController extends Controller
             'isbn' => 'nullable|string|max:50',
             'tahun_terbit' => 'nullable|integer|min:1000|max:3000',
             'penerbit' => 'nullable|string|max:255',
+            'pemanfaat' => 'nullable|string|max:255',
+            'nomor_klasifikasi' => 'nullable|string|max:255',
+            'nomor_panggil' => 'nullable|string|max:255',
             'cover_image' => 'required|image|mimes:jpeg,png,jpg|max:30720 ',
             'pdf_file' => 'required|mimes:pdf|max:30720 ', // max 10MB
         ]);
+
+       
 
         // Handle Cover Image Upload
         $coverPath = $request->file('cover_image')->store('covers', 'public');
@@ -62,6 +71,9 @@ class BookController extends Controller
             'isbn' => $request->isbn,
             'tahun_terbit' => $request->tahun_terbit,
             'penerbit' => $request->penerbit,
+            'pemanfaat' => $request->pemanfaat,
+            'nomor_klasifikasi' => $request->nomor_klasifikasi,
+            'nomor_panggil' => $request->nomor_panggil,
             'cover_image_path' => $coverPath,
             'pdf_path' => $pdfPath,
         ]);
@@ -72,7 +84,9 @@ class BookController extends Controller
 
     public function edit(Book $book)
     {
-        return view('admin.books.edit', compact('book'));
+        $pemanfaat = Pemanfaat::all();
+        $currentPemanfaat = Pemanfaat::where('kode_pemanfaat', $book->pemanfaat)->first();
+        return view('admin.books.edit', compact('book', 'pemanfaat', 'currentPemanfaat'));
     }
 
     public function update(Request $request, Book $book)

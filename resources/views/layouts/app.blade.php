@@ -42,18 +42,20 @@
                 <div class="hidden lg:flex lg:items-center lg:space-x-4">
                     <a class="py-2 px-3 hover:bg-indigo-600 hover:text-white rounded transition duration-150 ease-in-out" href="{{ route('books.index') }}">Semua Buku</a>
                     @auth
-                    <a class="py-2 px-3 hover:bg-indigo-600 hover:text-white rounded transition duration-150 ease-in-out" href="{{ route('dashboard') }}">Dashboard</a>
-                    @if(auth()->user()->role == 'admin')
-                    <a class="py-2 px-3 hover:bg-indigo-600 hover:text-white rounded transition duration-150 ease-in-out" href="{{ route('admin.books.index') }}">Manajemen Buku</a>
-                    @endif
-                    <form action="{{ route('logout') }}" method="POST" class="m-0 p-0">
-                        @csrf
-                        <button type="submit" class="py-2 px-3 hover:bg-red-600 hover:text-white rounded transition duration-150 ease-in-out align-middle">Logout</button>
-                    </form>
+                        @if(auth()->user()->role == 'admin')
+                            <a class="py-2 px-3 hover:bg-indigo-600 hover:text-white rounded transition duration-150 ease-in-out" href="{{ route('admin.dashboard') }}">Dashboard Admin</a>
+                            <a class="py-2 px-3 hover:bg-indigo-600 hover:text-white rounded transition duration-150 ease-in-out" href="{{ route('admin.books.index') }}">Manajemen Buku</a>
+                        @else
+                            <a class="py-2 px-3 hover:bg-indigo-600 hover:text-white rounded transition duration-150 ease-in-out" href="{{ route('dashboard') }}">Dashboard</a>
+                        @endif
+                        <form action="{{ route('logout') }}" method="POST" class="m-0 p-0">
+                            @csrf
+                            <button type="submit" class="py-2 px-3 hover:bg-red-600 hover:text-white rounded transition duration-150 ease-in-out align-middle">Logout</button>
+                        </form>
                     @endauth
                     @guest
-                    <a class="py-2 px-3 hover:bg-indigo-600 hover:text-white rounded transition duration-150 ease-in-out" href="{{ route('login') }}">Login</a>
-                    <a class="py-2 px-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded transition duration-150 ease-in-out" href="{{ route('register') }}">Register</a>
+                        <a class="py-2 px-3 hover:bg-indigo-600 hover:text-white rounded transition duration-150 ease-in-out" href="{{ route('login') }}">Login</a>
+                        <a class="py-2 px-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded transition duration-150 ease-in-out" href="{{ route('register') }}">Register</a>
                     @endguest
                 </div>
             </div>
@@ -63,20 +65,22 @@
                 <ul class="flex flex-col space-y-2">
                     <li><a class="block py-2 px-3 hover:bg-indigo-600  hover:text-white rounded transition duration-150" href="{{ route('books.index') }}">Semua Buku</a></li>
                     @auth
-                    <li><a class="block py-2 px-3 hover:bg-indigo-600 rounded transition duration-150" href="{{ route('dashboard') }}">Dashboard</a></li>
-                    @if(auth()->user()->role == 'admin')
-                    <li><a class="block py-2 px-3 hover:bg-indigo-600 rounded transition duration-150" href="{{ route('admin.books.index') }}">Manajemen Buku</a></li>
-                    @endif
-                    <li>
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="block w-full text-left py-2 px-3 hover:bg-indigo-600 rounded transition duration-150">Logout</button>
-                        </form>
-                    </li>
+                        @if(auth()->user()->role == 'admin')
+                            <li><a class="block py-2 px-3 hover:bg-indigo-600 rounded transition duration-150" href="{{ route('admin.dashboard') }}">Dashboard Admin</a></li>
+                            <li><a class="block py-2 px-3 hover:bg-indigo-600 rounded transition duration-150" href="{{ route('admin.books.index') }}">Manajemen Buku</a></li>
+                        @else
+                            <li><a class="block py-2 px-3 hover:bg-indigo-600 rounded transition duration-150" href="{{ route('dashboard') }}">Dashboard</a></li>
+                        @endif
+                        <li>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="block w-full text-left py-2 px-3 hover:bg-indigo-600 rounded transition duration-150">Logout</button>
+                            </form>
+                        </li>
                     @endauth
                     @guest
-                    <li><a class="block py-2 px-3 hover:bg-indigo-600  hover:text-white rounded transition duration-150" href="{{ route('login') }}">Login</a></li>
-                    <li><a class="block py-2 px-3 hover:bg-indigo-600 hover:text-white rounded transition duration-150" href="{{ route('register') }}">Register</a></li>
+                        <li><a class="block py-2 px-3 hover:bg-indigo-600  hover:text-white rounded transition duration-150" href="{{ route('login') }}">Login</a></li>
+                        <li><a class="block py-2 px-3 hover:bg-indigo-600 hover:text-white rounded transition duration-150" href="{{ route('register') }}">Register</a></li>
                     @endguest
                 </ul>
             </div>

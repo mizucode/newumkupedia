@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.dashboard-admin')
 @section('title', 'Edit Buku')
 @section('content')
 <div class="max-w-2xl mx-auto px-4 py-8">
@@ -10,6 +10,25 @@
             <div>
                 <label for="title" class="block text-sm font-medium text-gray-700 mb-1">Judul Buku</label>
                 <input type="text" name="title" id="title" value="{{ $book->title }}" required
+                    class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 px-3 py-2 text-gray-900">
+            </div>
+            <div>
+                <label for="pemanfaat" class="block text-sm font-medium text-gray-700 mb-1">Pengguna / Pemanfaat</label>
+                <select name="pemanfaat" id="pemanfaat" class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 px-3 py-2 text-gray-900">
+                    <option value="">-- Pilih Pemanfaat --</option>
+                    @foreach($pemanfaat as $p)
+                        <option value="{{ $p->kode_pemanfaat }}" {{ (old('pemanfaat', $book->pemanfaat) == $p->kode_pemanfaat) ? 'selected' : '' }}>{{ $p->kode_pemanfaat }} - {{ $p->nama_pemanfaat }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div>
+                <label for="nomor_klasifikasi" class="block text-sm font-medium text-gray-700 mb-1">Nomor Klasifikasi</label>
+                <input type="text" name="nomor_klasifikasi" id="nomor_klasifikasi" value="{{ $book->nomor_klasifikasi }}"
+                    class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 px-3 py-2 text-gray-900">
+            </div>
+            <div>
+                <label for="nomor_panggil" class="block text-sm font-medium text-gray-700 mb-1">Nomor Panggil</label>
+                <input type="text" name="nomor_panggil" id="nomor_panggil" value="{{ $book->nomor_panggil }}"
                     class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 px-3 py-2 text-gray-900">
             </div>
             <div>

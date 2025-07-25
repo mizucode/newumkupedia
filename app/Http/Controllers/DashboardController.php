@@ -12,6 +12,6 @@ class DashboardController extends Controller
         $user = Auth::user();
         $favoriteBooks = $user->favorites()->latest()->get();
 
-        return view('dashboard', compact('favoriteBooks'));
+        return view('admin.dashboard.index', compact('favoriteBooks'));
     }
 }

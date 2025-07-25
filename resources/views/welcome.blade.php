@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Laravel 11 & Tailwind CSS</title>
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(entrypoints: ['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="bg-slate-900 text-white">
         <div class="min-h-screen flex flex-col items-center justify-center">

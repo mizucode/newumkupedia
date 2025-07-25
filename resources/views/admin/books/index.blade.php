@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.dashboard-admin')
 @section('title', 'Manajemen Buku')
 @section('content')
 <div class="max-w-5xl min-h-screen mx-auto px-4 py-8">
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
         <div>
-            <h1 class="text-2xl font-bold text-gray-800">Manajemen Buku</h1>
+            <h1 class="text-2xl font-bold text-gray-800">Bibliografi Buku</h1>
             <div class="text-sm text-gray-500 mt-1">Total Buku: <span class="font-semibold">{{ method_exists($books, 'total') ? $books->total() : $books->count() }}</span></div>
         </div>
         <div class="flex flex-col sm:flex-row gap-2 sm:items-center">
@@ -15,7 +15,7 @@
             <a href="{{ route('admin.books.create') }}" class="inline-block px-4 py-2 bg-indigo-600 text-white rounded-md font-medium hover:bg-indigo-700 transition">Tambah Buku Baru</a>
         </div>
     </div>
-    <div class="bg-white shadow rounded-xl overflow-x-auto">
+    <div class="bg-white shadow  overflow-x-auto">
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
                 <tr>
