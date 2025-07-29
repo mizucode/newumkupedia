@@ -1,7 +1,7 @@
 @extends('layouts.dashboard-admin')
 @section('title', 'Manajemen Buku')
 @section('content')
-<div class="max-w-5xl min-h-screen mx-auto px-4 py-8">
+<div class=" min-h-screen mx-auto px-4 py-8">
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
         <div>
             <h1 class="text-2xl font-bold text-gray-800">Bibliografi Buku</h1>
@@ -32,6 +32,7 @@
                     <td class="px-4 py-2 font-medium text-gray-800">{{ $book->title }}</td>
                     <td class="px-4 py-2 text-gray-600">{{ $book->author }}</td>
                     <td class="px-4 py-2 space-x-2">
+                        <a href="{{ route('books.show', $book) }}" target="_blank" class="inline-block px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 text-xs font-semibold transition">Lihat</a>
                         <a href="{{ route('admin.books.edit', $book) }}" class="inline-block px-3 py-1 bg-yellow-400 text-white rounded hover:bg-yellow-500 text-xs font-semibold transition">Edit</a>
                         <form action="{{ route('admin.books.destroy', $book) }}" method="POST" class="inline" onsubmit="return confirm('Yakin ingin menghapus buku ini?');">
                             @csrf

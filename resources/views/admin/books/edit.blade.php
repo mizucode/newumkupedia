@@ -1,7 +1,7 @@
 @extends('layouts.dashboard-admin')
 @section('title', 'Edit Buku')
 @section('content')
-<div class="max-w-2xl mx-auto px-4 py-8">
+<div class=" mx-auto px-4 py-8">
     <h1 class="text-2xl font-bold text-gray-800 mb-6">Edit Buku: {{ $book->title }}</h1>
     <div class="bg-white shadow rounded-xl p-8">
         <form action="{{ route('admin.books.update', $book) }}" method="POST" enctype="multipart/form-data" class="space-y-6">

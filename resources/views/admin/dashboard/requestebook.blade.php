@@ -1,9 +1,9 @@
 @extends('layouts.dashboard')
 
 @section('content')
-<div class="container mx-auto py-8">
-    <div class="max-w-lg mx-auto bg-white p-6 rounded shadow">
-        <h2 class="text-2xl font-bold mb-6 text-center">Request Buku Baru</h2>
+<div class=" mx-auto py-8">
+    <div class=" mx-auto bg-white p-6 rounded shadow">
+        <h2 class="text-2xl font-bold mb-6 text-center">Request E-book Baru</h2>
         <form action="{{ route('admin.requestebook.store') }}" method="POST">
             @csrf
             <div class="mb-4">

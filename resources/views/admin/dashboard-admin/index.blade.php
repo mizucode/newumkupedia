@@ -29,13 +29,12 @@
                     </div>
                     <div class="mt-5 flex items-end justify-between">
                         <div>
-                            <span class="text-sm text-gray-500">Total E-book Difavoritkan</span>
+                            <span class="text-sm text-gray-500">Laporan Buku</span>
                             <h4 class="mt-2 text-title-sm font-bold text-gray-800">
-                                {{ $favoriteBooks->count() }}
-                            </h4>
+   {{ \App\Models\Book::count() }}                            </h4>
                         </div>
                     </div>
-                    <div class="w-full mt-3"> <a href="{{ route('favorites.list') }}" class="bg-red-500 w-full font-semibold hover:bg-red-400 rounded-md text-white inline-block py-2 text-center">Lihat</a>
+                    <div class="w-full mt-3"> <a href="{{ route('admin.laporan.buku') }}" class="bg-red-500 w-full font-semibold hover:bg-red-400 rounded-md text-white inline-block py-2 text-center">Lihat</a>
                     </div>
                 </div>
                 <div class="rounded-2xl border border-gray-200 bg-white p-5 md:p-6">
@@ -46,7 +45,7 @@
                     </div>
                     <div class="mt-5 flex items-end justify-between">
                         <div>
-                            <span class="text-sm text-gray-500">Total Buku Tersedia</span>
+                            <span class="text-sm text-gray-500">Bibliografi Buku</span>
                             <h4 class="mt-2 text-title-sm font-bold text-gray-800">
                                 {{ \App\Models\Book::count() }}
                             </h4>

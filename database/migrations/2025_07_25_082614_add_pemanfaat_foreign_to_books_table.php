@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Jalankan migrasi.
-     */
+    
     public function up(): void
     {
         Schema::table('books', function (Blueprint $table) {
@@ -16,21 +14,16 @@ return new class extends Migration
             $table->foreign('pemanfaat')
                   ->references('kode_pemanfaat')
                   ->on('pemanfaat')
-                  ->onDelete('set null') // Jika pemanfaat dihapus, kolom 'pemanfaat' di books akan jadi NULL
-                  ->onUpdate('cascade'); // Jika kode_pemanfaat di pemanfaat diupdate, kolom 'pemanfaat' di books akan ikut update
+                  ->onDelete('set null')
+                  ->onUpdate('cascade');
         });
     }
 
-    /**
-     * Batalkan migrasi.
-     */
     public function down(): void
     {
         Schema::table('books', function (Blueprint $table) {
-            // Drop foreign key constraint terlebih dahulu
-            $table->dropForeign(['pemanfaat']); // Nama constraint default Laravel: books_pemanfaat_foreign
+            $table->dropForeign(['pemanfaat']); 
 
-            // Kemudian drop kolom 'pemanfaat'
             $table->dropColumn('pemanfaat');
         });
     }

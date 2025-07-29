@@ -44,7 +44,7 @@
                     @auth
                         @if(auth()->user()->role == 'admin')
                             <a class="py-2 px-3 hover:bg-indigo-600 hover:text-white rounded transition duration-150 ease-in-out" href="{{ route('admin.dashboard') }}">Dashboard Admin</a>
-                            <a class="py-2 px-3 hover:bg-indigo-600 hover:text-white rounded transition duration-150 ease-in-out" href="{{ route('admin.books.index') }}">Manajemen Buku</a>
+                         
                         @else
                             <a class="py-2 px-3 hover:bg-indigo-600 hover:text-white rounded transition duration-150 ease-in-out" href="{{ route('dashboard') }}">Dashboard</a>
                         @endif
@@ -67,7 +67,7 @@
                     @auth
                         @if(auth()->user()->role == 'admin')
                             <li><a class="block py-2 px-3 hover:bg-indigo-600 rounded transition duration-150" href="{{ route('admin.dashboard') }}">Dashboard Admin</a></li>
-                            <li><a class="block py-2 px-3 hover:bg-indigo-600 rounded transition duration-150" href="{{ route('admin.books.index') }}">Manajemen Buku</a></li>
+                          
                         @else
                             <li><a class="block py-2 px-3 hover:bg-indigo-600 rounded transition duration-150" href="{{ route('dashboard') }}">Dashboard</a></li>
                         @endif

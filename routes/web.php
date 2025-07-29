@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LaporanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
@@ -61,5 +62,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     })->name('daftarpermintaanebook');
     Route::resource('books', AdminBookController::class);
     Route::resource('pemanfaat', PemanfaatController::class);
+    Route::get('/laporan-buku', [LaporanController::class, 'laporanBuku'])->name('laporan.buku');
+    Route::get('/laporan-pengguna', [LaporanController::class, 'laporanPengguna'])->name('laporan.pengguna');
 
 });
